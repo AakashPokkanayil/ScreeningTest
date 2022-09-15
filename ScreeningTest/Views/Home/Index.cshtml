@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container">
+ <div class="row pb-3">
+<div class="col-sm d-flex">
+    <input type="text" class="me-2" id="txtid" placeholder="Insert Id" />
+    <input type="button" class="btn btn-primary btn-lg active " onclick="getmailid()" value="Click"/>
+</div>
+ </div>
+
+   <div class="row">
+        <div class="col-sm">
+            <span id="email"></span>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function getmailid()
+    {
+        if($("#txtid").val())
+        {
+        $.ajax({
+            url:"https://reqres.in/api/users/"+$("#txtid").val(),
+            method:"GET",
+            success:function(res)
+            {
+                if(res!=null && res.data!=null && res.data.email!=null)
+                {
+                    $('#email').html(res.data.email);
+                }
+            //console.log(res.data.email);
+            },
+            error:function(err)
+            {
+                console.lof(err);
+            }
+        });
+        }
+    }
+</script>
